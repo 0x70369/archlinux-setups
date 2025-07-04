@@ -1,0 +1,15 @@
+# https://man.archlinux.org/man/alpm-hooks.5#EXAMPLES
+# Force disks to sync to reduce the risk of data corruption
+
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Syncing disks...
+Depends = coreutils
+When = PostTransaction
+Exec = /usr/bin/sync
