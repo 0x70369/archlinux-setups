@@ -1,0 +1,50 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+
+# Substitute $HOSTNAME with your host name, if you defined one (you can see it with: cat /etc/hostname)
+
+####################################################################
+
+# The following lines are desirable for IPv4 capable hosts
+127.0.0.1       localhost
+127.0.0.1       localhost.localdomain
+
+#127.0.0.1	$HOSTNAME
+#127.0.0.1	$HOSTNAME.localdomain
+
+127.0.1.1	localhost
+127.0.1.1	localhost.localdomain
+
+#127.0.1.1	$HOSTNAME
+#127.0.1.1	$HOSTNAME.localdomain
+
+####################################################################
+
+# The following lines are desirable for IPv6 capable hosts
+::1             localhost
+::1             localhost.localdomain
+
+#::1		$HOSTNAME
+#::1		$HOSTNAME.localdomain
+
+::1		ip6-localhost
+
+::1		ip6-loopback
+
+fe00::0         ip6-localnet
+
+ff00::0         ip6-mcastprefix
+
+ff02::1         ip6-allnodes
+
+ff02::2         ip6-allrouters
+
+ff02::3		ip6-allhosts
+
+ff02::4		ip6-allrouters-mcast
+
+ff02::5		ip6-ospf-routers
+
+ff02::6		ip6-ospf-designated-routers
+
+ff02::9		ip6-rip-routers
