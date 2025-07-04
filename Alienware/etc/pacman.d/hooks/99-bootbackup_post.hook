@@ -1,0 +1,14 @@
+# https://wiki.archlinux.org/title/System_backup#Snapshots_and_/boot_partition
+
+[Trigger]
+Operation = Upgrade
+Operation = Install
+Operation = Remove
+Type = Path
+Target = usr/lib/modules/*/vmlinuz
+
+[Action]
+Depends = rsync
+Description = Backing up post /boot...
+When = PostTransaction
+Exec = /usr/bin/rsync -a --mkpath --delete /boot/ "/.bootbackup/$(date +%Y_%m_%d_%H.%M.%S)_post"/
