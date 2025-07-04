@@ -1,0 +1,12 @@
+# Automatically undo the step at https://wiki.archlinux.org/title/Systemd-boot#UEFI_Shells_or_other_EFI_applications
+
+[Trigger]
+Operation = Remove
+Type = Package
+Target = edk2-shell
+
+[Action]
+Description = Removing the shell EFI file inside /boot...
+Depends = coreutils
+When = PostTransaction
+Exec = /usr/bin/rm /boot/shellx64.efi --force
