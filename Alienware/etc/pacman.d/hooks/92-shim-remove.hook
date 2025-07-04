@@ -1,0 +1,10 @@
+[Trigger]
+Type = Package
+Target = shim-signed
+Operation = Remove
+
+[Action]
+Depends = coreutils
+Description = Removing shimx64.efi and mmx64.efi from /boot/EFI/systemd...
+When = PreTransaction
+Exec = /usr/bin/rm /boot/EFI/systemd/shimx64.efi /boot/EFI/systemd/mmx64.efi --force
