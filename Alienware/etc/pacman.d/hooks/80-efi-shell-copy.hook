@@ -1,0 +1,13 @@
+# Automatically perform the step at https://wiki.archlinux.org/title/Systemd-boot#UEFI_Shells_or_other_EFI_applications
+
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = edk2-shell
+
+[Action]
+Description = Copying the shell EFI file to /boot...
+Depends = coreutils
+When = PostTransaction
+Exec = /usr/bin/cp /usr/share/edk2-shell/x64/Shell.efi /boot/shellx64.efi --force
