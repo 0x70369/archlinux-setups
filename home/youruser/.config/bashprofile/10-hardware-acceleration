@@ -1,0 +1,167 @@
+# -----------------------------------------------------
+# Hardware Video Acceleration - VA-API
+# -----------------------------------------------------
+
+# Function to set the LIBVA_DRIVER_NAME variable dynamically (https://wiki.archlinux.org/title/Hardware_video_acceleration#Configuring_VA-API)
+set_vaapi_driver() {
+
+    unset LIBVA_DRIVER_NAME
+
+    # Check if an Nvidia GPU is physically present
+    if lspci | grep -qi 'nvidia'; then
+
+        # Nvidia is enabled — use Nvidia VA-API driver
+        export LIBVA_DRIVER_NAME=nvidia
+        echo "LIBVA_DRIVER_NAME set to nvidia"
+
+    else
+        # No Nvidia GPU detected — use Intel VA-API driver
+        export LIBVA_DRIVER_NAME=iHD
+        echo "LIBVA_DRIVER_NAME set to iHD (Intel)"
+    fi
+}
+
+# Call the function on shell startup
+set_vaapi_driver
+
+# Enable MPEG4 for VA-API (https://docs.mesa3d.org/envvars.html#va-api-environment-variables)
+export VAAPI_MPEG4_ENABLED=true
+
+
+
+
+
+# -----------------------------------------------------
+# Hardware Video Acceleration - VDPAU
+# -----------------------------------------------------
+
+# Function to set the VDPAU_DRIVER variable dynamically (https://wiki.archlinux.org/title/Hardware_video_acceleration#Configuring_VDPAU)
+# This requires the libvdpau-va-gl package to be installed (sudo pacman -S --needed libvdpau-va-gl). Otherwise, the Intel iGPU can't be used for VDPAU
+
+set_vdpau_driver() {
+
+    unset VDPAU_DRIVER
+
+    # Check if an Nvidia GPU is physically present
+    if lspci | grep -qi 'nvidia'; then
+
+        # Nvidia is enabled — use native Nvidia VDPAU driver
+        export VDPAU_DRIVER=nvidia
+        echo "VDPAU_DRIVER set to nvidia"
+
+    else
+        # No Nvidia GPU detected — fallback to Intel's VA-GL
+        export VDPAU_DRIVER=va_gl
+        echo "VDPAU_DRIVER set to va_gl (Intel)"
+    fi
+}
+
+# Call the function on shell startup
+set_vdpau_driver
+
+
+
+
+
+# -----------------------------------------------------
+# Vulkan
+# -----------------------------------------------------
+
+# Function to set the MESA_VK_DEVICE_SELECT variable dynamically (https://wiki.archlinux.org/title/Vulkan#Switching_between_devices)
+set_mesa_vk_device() {
+
+    unset MESA_VK_DEVICE_SELECT
+
+    # Make sure vulkaninfo is installed
+    if ! command -v vulkaninfo &>/dev/null; then
+        echo "vulkaninfo not found. Did you install it?"
+        return 1
+    fi
+
+    local vk_devices nvidia_id amd_id intel_id
+
+    # Get available devices
+    vk_devices=$(LC_ALL=C MESA_VK_DEVICE_SELECT=list vulkaninfo 2>&1)
+
+    # Print an error if none are found
+    if [[ -z "$vk_devices" ]]; then
+        echo "Failed to list Vulkan devices."
+        return 1
+    fi
+
+    # Extract vendorID:deviceID from the output of vulkaninfo
+    nvidia_id=$(grep -Eo "10de:[0-9a-f]{4}" <<< "$vk_devices" | head -n1)
+    amd_id=$(grep -Eo "1002:[0-9a-f]{4}" <<< "$vk_devices" | head -n1)
+    intel_id=$(grep -Eo "8086:[0-9a-f]{4}" <<< "$vk_devices" | head -n1)
+
+    # Set the GPU used for Vulkan
+    if [[ -n "$nvidia_id" ]]; then
+
+        export MESA_VK_DEVICE_SELECT="$nvidia_id"
+        echo "MESA_VK_DEVICE_SELECT set to $MESA_VK_DEVICE_SELECT (NVIDIA)"
+
+    elif [[ -n "$amd_id" ]]; then
+
+        export MESA_VK_DEVICE_SELECT="$amd_id"
+        echo "MESA_VK_DEVICE_SELECT set to $MESA_VK_DEVICE_SELECT (AMD)"
+
+    elif [[ -n "$intel_id" ]]; then
+
+        export MESA_VK_DEVICE_SELECT="$intel_id"
+        echo "MESA_VK_DEVICE_SELECT set to $MESA_VK_DEVICE_SELECT (Intel)"
+
+    else
+        echo "No supported Vulkan devices found."
+        return 1
+    fi
+}
+
+# Call on shell startup
+set_mesa_vk_device
+
+
+
+
+
+# -----------------------------------------------------
+# Hardware Video Acceleration - DRI_PRIME
+# -----------------------------------------------------
+
+# Function to set the DRI_PRIME variable dynamically (https://docs.mesa3d.org/envvars.html#envvar-DRI_PRIME)
+set_dri_prime() {
+    unset DRI_PRIME
+
+    local gpu_list nvidia_id amd_id intel_id
+
+    # list only VGA controllers
+    gpu_list=$(lspci -nn | grep VGA)
+
+    # Print an error if none are found
+    if [[ -z "$gpu_list" ]]; then
+        echo "No GPUs found."
+        return 1
+    fi
+
+    nvidia_id=$(grep -Eo "10de:[0-9a-f]{4}" <<< "$gpu_list" | head -n1)
+    amd_id=$(grep -Eo "1002:[0-9a-f]{4}" <<< "$gpu_list" | head -n1)
+    intel_id=$(grep -Eo "8086:[0-9a-f]{4}" <<< "$gpu_list" | head -n1)
+
+    if [[ -n "$nvidia_id" ]]; then
+        export DRI_PRIME=$nvidia_id
+        echo "DRI_PRIME set to $DRI_PRIME (NVIDIA)"
+
+    elif [[ -n "$amd_id" ]]; then
+        export DRI_PRIME=$amd_id
+        echo "DRI_PRIME set to $DRI_PRIME (AMD)"
+
+    elif [[ -n "$intel_id" ]]; then
+        export DRI_PRIME=$intel_id
+        echo "DRI_PRIME set to $DRI_PRIME (Intel)"
+
+    else
+        echo "No NVIDIA, AMD or Intel GPU detected; DRI_PRIME not set."
+    fi
+}
+
+# Invoke on shell startup
+##set_dri_prime
