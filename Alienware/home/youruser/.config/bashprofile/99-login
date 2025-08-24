@@ -39,32 +39,32 @@ fi
 
 #if [[ -z $DISPLAY ]] && [[ "$(tty)" = /dev/tty2 ]] && [[ -z $SSH_CONNECTION ]]; then
 
-	#export QT_QPA_PLATFORM=xcb              # Qt apps use X11 explicitly
-	#export GDK_BACKEND=x11                  # GTK apps use X11
-	#export XDG_SESSION_TYPE=x11             # Session type for apps to detect
-	#export XDG_CURRENT_DESKTOP=KDE          # KDE-specific hint for theming/integration
-	#export DESKTOP_SESSION=plasma           # Used by some session-aware apps
-	#export KDE_FULL_SESSION=true            # KDE session flag
+#	export QT_QPA_PLATFORM=xcb              # Qt apps use X11 explicitly
+#	export GDK_BACKEND=x11                  # GTK apps use X11
+#	export XDG_SESSION_TYPE=x11             # Session type for apps to detect
+#	export XDG_CURRENT_DESKTOP=KDE          # KDE-specific hint for theming/integration
+#	export DESKTOP_SESSION=plasma           # Used by some session-aware apps
+#	export KDE_FULL_SESSION=true            # KDE session flag
 
-	#printf "\n"
+#	printf "\n"
 
-	#printf "Starting Plasma (X11) in "
-	#sleep 1
-	#printf "3, "
-	#sleep 1
-	#printf "2, "
-	#sleep 1
-	#printf "1..."
-	#sleep 1
+#	printf "Starting Plasma (X11) in "
+#	sleep 1
+#	printf "3, "
+#	sleep 1
+#	printf "2, "
+#	sleep 1
+#	printf "1..."
+#	sleep 1
 
     # Start the X server and launch Plasma:
     # Check if a D-Bus session was already started by systemd
-	#if [[ -z "${DBUS_SESSION_BUS_ADDRESS}" ]]; then
-		#exec dbus-run-session -- startx startplasma-x11
-	#else
-		#exec startx startplasma-x11
-	#fi
+#	if [[ -z "${DBUS_SESSION_BUS_ADDRESS}" ]]; then
+#		exec dbus-run-session -- startx startplasma-x11
+#	else
+#		exec startx startplasma-x11
+#	fi
 
-	#logout                                  # Prevents an endless loop in case Plasma fails to launch
+#	logout                                  # Prevents an endless loop in case Plasma fails to launch
 
 #fi
