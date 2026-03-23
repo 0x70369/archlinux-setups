@@ -1,4 +1,3 @@
-# https://man.archlinux.org/man/alpm-hooks.5#EXAMPLES
 # Force disks to sync to reduce the risk of data corruption
 
 [Trigger]
@@ -12,4 +11,4 @@ Target = *
 Description = Syncing disks...
 Depends = coreutils
 When = PostTransaction
-Exec = /usr/bin/sync
+Exec = /bin/sync

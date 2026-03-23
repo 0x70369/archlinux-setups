@@ -1,13 +1,32 @@
+#!/bin/env bash
+
+#
+# ~/.bash_profile
+#
+
 # DON'T CHANGE THIS FILE
-# You can define your custom configuration by adding/editing files in ~/.config/bashprofile
+# You can define your custom configuration by adding/editing files in ~/.config/bashprofile.d
 
-for file in "$HOME"/.config/bashprofile/*; do
-    [ -f "$file" ] && [ -r "$file" ] && [ -s "$file" ] || continue
+# Login shells: load POSIX profile first (env for all shells)
+# shellcheck source=/dev/null
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
 
-    if ! . "$file"; then
-        printf 'Failed to load: %s\n' "$file" >&2
-    fi
-done
+if [ -d "$HOME"/.config/bashprofile.d ]; then
+    for file in "$HOME"/.config/bashprofile.d/*; do
+        [ -f "$file" ] && [ -r "$file" ] && [ -s "$file" ] || continue
+
+        if ! . "$file"; then
+            printf 'Failed to load: %s\n' "$file" >&2
+        fi
+    done
+
+    unset file
+else
+    mkdir -p "$HOME/.config/bashprofile.d" >/dev/null >&2
+    echo "The '~/.config/bashprofile.d' directory was created. You can customize your session by editing files there."
+fi
 
 ####################################################################
 

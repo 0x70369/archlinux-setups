@@ -9,4 +9,4 @@ Target = edk2-shell
 Description = Removing the shell EFI file inside /boot...
 Depends = coreutils
 When = PostTransaction
-Exec = /usr/bin/rm /boot/shellx64.efi --force
+Exec = /bin/rm /boot/shellx64.efi -fv

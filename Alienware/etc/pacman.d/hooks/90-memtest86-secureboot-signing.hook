@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = memtest86+-efi
+
+[Action]
+Depends = sbsigntools
+Description = Signing EFI binary with MOK...
+When = PostTransaction
+Exec = /bin/sh /usr/local/sbin/memtest86-secureboot-signing.sh

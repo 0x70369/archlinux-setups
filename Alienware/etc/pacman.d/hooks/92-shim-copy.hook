@@ -1,11 +1,11 @@
 [Trigger]
-Type = Package
-Target = shim-signed
 Operation = Install
 Operation = Upgrade
+Type = Package
+Target = shim-signed
 
 [Action]
 Depends = coreutils
-Description = Copying shimx64.efi and mmx64.efi into /boot/EFI/systemd...
+Description = Copying shim binaries to ESP...
 When = PostTransaction
-Exec = /usr/bin/cp /usr/share/shim-signed/shimx64.efi /usr/share/shim-signed/mmx64.efi /boot/EFI/systemd/ --force
+Exec = /bin/sh /usr/local/sbin/shim-setup.sh install
