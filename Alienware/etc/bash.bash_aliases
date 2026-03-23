@@ -11,7 +11,7 @@
 # fi
 # -r checks if the file is readable;
 
-# Even though this file was written for Bash, >almost< everything here is POSIX-compatble,
+# Even though this file was written for Bash, >almost< everything here is POSIX-compatible,
 # so you should be able to use this anywhere with minimal friction (change the hashbang).
 
 # This file was written for Arch Linux btw, some aliases aren't applicable for other distros.
@@ -56,9 +56,9 @@ if command_exists eza; then
     alias lT="eza -aT --icons=always --color=always -L"
 
     # Sort by OPTION ==> -s OPTION
-    alias lx="eza -alsh Extension --icons=always --color=always"
-    alias lz="eza -alsh size --icons=always --color=always"
-    alias ld="eza -alsh date --icons=always --color=always"
+    alias lx="eza -alhs Extension --icons=always --color=always"
+    alias lz="eza -alhs size --icons=always --color=always"
+    alias ld="eza -alhs date --icons=always --color=always"
 else
     alias ls="ls -Ah --color=always"
     alias ll="ls -Alh --color=always"
