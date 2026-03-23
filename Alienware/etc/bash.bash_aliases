@@ -78,7 +78,7 @@ alias vdir="vdir -Ash --color=auto"
 if command_exists rg; then
     alias grep="rg -p --engine=auto"
 else
-    alias grep="grep --color=auto"
+    alias grep="grep --color=always"
     alias fgrep="grep -F --color=always"
     alias egrep="grep -E --color=always"
 fi
@@ -151,7 +151,7 @@ fi
 # -----------------------------------------------------
 # Convenience stuff
 # -----------------------------------------------------
-alias log-out="loginctl terminate-user $USER"
+alias log-out='loginctl terminate-user "$USER"'
 alias lock-session="loginctl lock-session"
 alias which-filetype="xdg-mime query filetype"
 
