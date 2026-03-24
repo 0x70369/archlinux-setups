@@ -230,6 +230,7 @@ get_aur_helper() {
 
     # Since other functions use this value, export it as an environment variable for easier fetching
     export AUR_HELPER="$aur_helper"
+    echo "$AUR_HELPER"
 }
 
 # Automatically install the needed support files for this .bashrc file
