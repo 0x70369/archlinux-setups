@@ -71,4 +71,4 @@ alias reformat-usb32G="sudo mkfs.exfat -b 4M -c 32K -v"
 
 # Repairing my USB flash drives (uses exfatprogs, install it if not already present) (inform the partition after the alias, e.g. /dev/sda1)
 # More details in: man fsck.exfat
-alias repair-exfat="sudo fsck.exfat -s -v -p"
+alias repair-exfat="sudo fsck.exfat -svp"
