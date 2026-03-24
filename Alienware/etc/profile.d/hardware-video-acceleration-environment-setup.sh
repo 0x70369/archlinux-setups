@@ -50,7 +50,7 @@ set_mesa_vk_device() {
     # Set the GPU used for Vulkan
     ## Remove and/or change the order of the vendors according to your system's
     ## configuration, in order to speed up the function's execution.
-    for var in nvidia_id intel_id amd_id; do
+    for var in "$nvidia_id" "$intel_id" "$amd_id"; do
         if [ -n "$var" ]; then
             export MESA_VK_DEVICE_SELECT="$var"
             echo "MESA_VK_DEVICE_SELECT set to $MESA_VK_DEVICE_SELECT"
