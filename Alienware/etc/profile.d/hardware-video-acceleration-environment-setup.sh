@@ -98,9 +98,7 @@ set_vaapi_driver() {
             echo "LIBVA_DRIVER_NAME set to radeonsi (AMD)"
             ;;
 
-        *)
-            echo "Unknown or unset MESA_VK_DEVICE_SELECT. LIBVA_DRIVER_NAME not set."
-            ;;
+        *) echo "Unknown or unset MESA_VK_DEVICE_SELECT. LIBVA_DRIVER_NAME not set." ;;
     esac
 }
 set_vaapi_driver
@@ -142,9 +140,7 @@ set_vdpau_driver() {
             echo "VDPAU_DRIVER set to radeonsi (AMD)"
             ;;
 
-        *)
-            echo "Unknown or unset MESA_VK_DEVICE_SELECT. VDPAU_DRIVER not set."
-            ;;
+        *) echo "Unknown or unset MESA_VK_DEVICE_SELECT. VDPAU_DRIVER not set." ;;
     esac
 }
 set_vdpau_driver
