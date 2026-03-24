@@ -64,7 +64,7 @@ set_mesa_vk_device
 
 # Enabling Vulkan Video support with Intel GPU
 ## https://wiki.archlinux.org/title/Hardware_video_acceleration#Configuring_Vulkan_Video
-export ANV_VIDEO_DECODE=1    # Legacy variable, not sure if it's relevant anymore, but it'll stay for now.
+#export ANV_VIDEO_DECODE=1    # Legacy variable, not sure if it's relevant anymore, but it'll stay for now.
 export ANV_DEBUG=video-decode,video-encode
 
 
