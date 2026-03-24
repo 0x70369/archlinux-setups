@@ -21,7 +21,8 @@ alias edit-alias="nano $HOME/.config/bashrc.d/20-aliases"
 # Applications
 # -----------------------------------------------------
 # yt-dlp aliases
-alias ytdlp-audio="yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail --audio-quality 0 --embed-metadata -o '/temp/%(title)s.%(ext)s'"
+alias yt-dlp="yt-dlp --color always --progress --check-formats"
+alias ytdlp-audio="yt-dlp --extract-audio --audio-format flac --embed-thumbnail --audio-quality 0 --embed-metadata -o '/temp/%(title)s.%(ext)s'"
 
 # zotify aliases
 # Remember to install python-pipx
