@@ -9,30 +9,27 @@ alias vi='nvim'
 alias vim='nvim'
 alias n="nano"
 
-
 # -----------------------------------------------------
 # Shell
 # -----------------------------------------------------
 alias reload-bash=". ~/.bashrc; clear; fastfetch --config examples/13"
-alias edit-alias="nano $HOME/.config/bashrc.d/20-aliases"
-
+alias edit-alias="nano $HOME/.config/bashrc.d/20-aliases.bash"
 
 # -----------------------------------------------------
 # Applications
 # -----------------------------------------------------
 # yt-dlp aliases
-alias yt-dlp="yt-dlp --color always --progress --check-formats"
-alias ytdlp-audio="yt-dlp --extract-audio --audio-format flac --embed-thumbnail --audio-quality 0 --embed-metadata -o '/temp/%(title)s.%(ext)s'"
+alias yt-dlp="yt-dlp --color always --progress --check-formats --embed-thumbnail --embed-metadata  --xattrs -f - -o '/temp/%(title)s.%(ext)s'"
+alias ytdlp-audio="yt-dlp --extract-audio --audio-format flac --audio-quality 0"
 
-# zotify aliases
-# Remember to install python-pipx
+# zotify aliases (although there are maintained forks of the project, there are others as well, like votify and onthespot)
+# Remember to install pipx
 #alias zotify-download="zotify --config=$HOME/.config/zotify/config.json" # senha nova: !&9caiorotunno
-##alias edit-zotify="nano $HOME/.config/zotify/config.json" # pipx install git+https://zotify.xyz/zotify/zotify@v1.0-dev OR pipx install git+https://github.com/yodaluca23/zotify.git@v1.0-dev
+#alias edit-zotify="nano $HOME/.config/zotify/config.json" # pipx install git+https://zotify.xyz/zotify/zotify@v1.0-dev OR pipx install git+https://github.com/yodaluca23/zotify.git@v1.0-dev
 
 # Protontricks ---> https://github.com/Matoking/protontricks?tab=readme-ov-file#flatpak-recommended
 alias protontricks="flatpak run com.github.Matoking.protontricks"
 alias protontricks-launch="flatpak run --command=protontricks-launch com.github.Matoking.protontricks"
-
 
 # -----------------------------------------------------
 # MATLAB
@@ -53,14 +50,13 @@ alias protontricks-launch="flatpak run --command=protontricks-launch com.github.
 # Only enable this alias if the dGPU is active, so MATLAB can benefit from extra performance
 ##if [[ "$LIBVA_DRIVER_NAME" = nvidia ]] && [[ "$VDPAU_DRIVER" = nvidia ]]; then
 
-    ##alias MATLAB="env LD_PRELOAD=/usr/lib/libstdc++.so LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/ QT_QPA_PLATFORM=xcb prime-run /usr/local/bin/matlab -useStartupFolderPref -nosoftwareopengl"
-    ##alias MATLAB="env LD_PRELOAD=/usr/lib/libstdc++.so LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/ QT_QPA_PLATFORM=xcb __NV_PRIME_RENDER_OFFLOAD=1 __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_LAYER_NV_optimus=NVIDIA_only /usr/local/bin/matlab -useStartupFolderPref -nosoftwareopengl"
+##alias MATLAB="env LD_PRELOAD=/usr/lib/libstdc++.so LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/ QT_QPA_PLATFORM=xcb prime-run /usr/local/bin/matlab -useStartupFolderPref -nosoftwareopengl"
+##alias MATLAB="env LD_PRELOAD=/usr/lib/libstdc++.so LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/ QT_QPA_PLATFORM=xcb __NV_PRIME_RENDER_OFFLOAD=1 __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_LAYER_NV_optimus=NVIDIA_only /usr/local/bin/matlab -useStartupFolderPref -nosoftwareopengl"
 
 ##fi
 
 # Remember to install the packages mentioned in the sections linked above!
 # Also also in this section, if you have a Nvidia GPU: https://wiki.archlinux.org/title/MATLAB#GPU_computing
-
 
 # -----------------------------------------------------
 # Formatting and Repairing
