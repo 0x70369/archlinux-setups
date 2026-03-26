@@ -9,7 +9,7 @@
 
 # Source user's custom configuration
 if [ -d "$HOME"/.config/bashrc.d ]; then
-    for file in "$HOME"/.config/bashrc.d/*; do
+    for file in "$HOME"/.config/bashrc.d/*.bash; do
         [ -f "$file" ] && [ -r "$file" ] && [ -s "$file" ] || continue
 
         if ! . "$file"; then
@@ -22,7 +22,6 @@ else
     mkdir -p "$HOME/.config/bashrc.d" >/dev/null >&2
     echo "The '~/.config/bashrc.d' directory was created. You can customize your shell by editing files there."
 fi
-
 
 # -f checks if $file exists and it's a regular file;
 # -r checks if $file is readable;

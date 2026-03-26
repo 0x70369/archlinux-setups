@@ -190,14 +190,18 @@ alias countfiles="for t in files links directories; do echo \`find . -type \${t:
 
 # Aliases for archives
 if command_exists tar; then
-    alias tar="tar --acls --selinux --xattrs"
-    # tar's "-a" parameter enables autodetection
+    alias tar="tar --acls --selinux --xattrs --totals --checkpoint=.10000"
+    # tar's "-a" parameter enables archive format autodetection.
+    
+    # --checkpoint=.10000 makes tar print a dot on stdout after processing
+    # 10000 records (by default, each record is 10 KiB), or 100 MiB.
+    # This allows you to have a makeshift progress bar on your screen.
     
     ## Usage: <alias> <output archive file> <input files>
     alias mktar="tar -cvaf"
     
     ## Usage: <alias> <archive>
-    alias untar="tar -xvaf"
+    alias untar="tar -xaf"
 fi
 
 

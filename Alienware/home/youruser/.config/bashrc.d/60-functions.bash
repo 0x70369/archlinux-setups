@@ -12,16 +12,16 @@ extract() {
     for archive in "$@"; do
         if [ -f "$archive" ]; then
             case "$archive" in
-            *.tar.* | *.tbz2 | *.tgz | *.tar) tar -xvaf "$archive" ;; # -a enables autodetection for tar
+            *.tar.* | *.tbz2 | *.tgz | *.tar) tar -xaf "$archive" ;; # -a enables autodetection for tar
             *.7z) 7z x "$archive" ;;
-            *.bz2) bunzip2 "$archive" ;;
+            *.bz2) bunzip2 -v "$archive" ;;
             *.exe) cabextract "$archive" ;;
-            *.gz) gunzip "$archive" ;;
+            *.gz) gunzip -v "$archive" ;;
             *.rar) unar x "$archive" ;;
-            *.xz) unxz "$archive" ;;
-            *.Z) uncompress "$archive" ;;
-            *.zip) unzip "$archive" ;;
-            *.zst) unzstd "$archive" ;;
+            *.xz) unxz -vv "$archive" ;;
+            *.Z) uncompress -v "$archive" ;;
+            *.zip) unzip -v "$archive" ;;
+            *.zst) unzstd -v "$archive" ;;
             *) echo "don't know how to extract '$archive'..." ;;
             esac
         else

@@ -14,7 +14,7 @@ if [ -f "$HOME/.profile" ]; then
 fi
 
 if [ -d "$HOME"/.config/bashprofile.d ]; then
-    for file in "$HOME"/.config/bashprofile.d/*; do
+    for file in "$HOME"/.config/bashprofile.d/*.bash; do
         [ -f "$file" ] && [ -r "$file" ] && [ -s "$file" ] || continue
 
         if ! . "$file"; then
