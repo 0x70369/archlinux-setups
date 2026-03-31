@@ -45,42 +45,43 @@ fi
 # ls aliases
 if command_exists eza; then
     # For icons to be well displayed, use a nerd font
-    alias ls="eza -a --icons=always --color=always"
-    alias ll="eza -alh --icons=always --color=always"
-    alias lr="eza -aR --icons=always --color=always"
+    alias eza="eza -ah --icons=always --color=always"
+    alias ls="eza"
+    alias ll="eza -l"
+    alias lr="eza -R"
 
     # Recurse as a tree ==> -T
     ## -L (level) controls how deep the tree goes
     ### A numerical argument is required: lT x
     ## -l (list format) is optional
-    alias lT="eza -aT --icons=always --color=always -L"
+    alias lT="eza -T -L"
 
     # Sort by OPTION ==> -s OPTION
-    alias lx="eza -alhs Extension --icons=always --color=always"
-    alias lz="eza -alhs size --icons=always --color=always"
-    alias ld="eza -alhs date --icons=always --color=always"
+    alias lx="eza -ls Extension"
+    alias lz="eza -ls size"
+    alias ld="eza -ls date"
 else
     alias ls="ls -Ah --color=always"
-    alias ll="ls -Alh --color=always"
-    alias lr="ls -ARh --color=always"
+    alias ll="ls -l"
+    alias lr="ls -R"
 
     # Sort by OPTION
-    alias lx="ls -AlXh --color=always"
-    alias lz="ls -AlSh --color=always"
-    alias ld="ls -Alth --color=always"
+    alias lx="ls -lX"
+    alias lz="ls -lS"
+    alias ld="ls -lt"
 fi
 
 # dir aliases
-alias dir="dir -Ash --color=auto"
-alias vdir="vdir -Ash --color=auto"
+alias dir="dir -Ash --color=always"
+alias vdir="vdir -Ash --color=always"
 
 # grep aliases
 if command_exists rg; then
     alias grep="rg -p --engine=auto"
 else
     alias grep="grep --color=always"
-    alias fgrep="grep -F --color=always"
-    alias egrep="grep -E --color=always"
+    alias fgrep="grep -F"
+    alias egrep="grep -E"
 fi
 
 # Clear screen for real (it does not work in Terminology)
@@ -102,7 +103,7 @@ fi
 # Network
 alias ping="ping -c 5"
 alias test-internet="ping -c 5 ping.archlinux.org"
-alias reset-network="sudo -u root systemctl restart systemd-resolved.service NetworkManager.service"
+alias reset-network="sudo systemctl restart systemd-resolved.service NetworkManager.service"
 alias openports="netstat -nape --inet" # Show open ports
 
 # Adjust these 2 for your system
