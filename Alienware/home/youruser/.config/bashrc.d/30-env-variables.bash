@@ -128,3 +128,11 @@ fi
 # Uncomment this if your cursor doesn't appear on your screen when using Wayland. Note: not a guaranteed fix
 ## https://wiki.archlinux.org/title/Sway#No_visible_cursor
 #export WLR_NO_HARDWARE_CURSORS=1
+
+
+# -----------------------------------------------------
+# Cleanup
+# -----------------------------------------------------
+# The functions defined here should not be available beyond this file's scope.
+# Users can define their own functions in the dedicated configuration file (60-functions.bash).
+unset -f add_paths add_config_dirs add_data_dirs
