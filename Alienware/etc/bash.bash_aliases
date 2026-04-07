@@ -3,16 +3,18 @@
 # -----------------------------------------------------
 # Notes
 # -----------------------------------------------------
-# This file is useless by itself. Make sure it is sourced by the global bashrc file inside /etc.
-# On Arch Linux, said file is: /etc/bash.bashrc
-# Example snippet to put there:
+# This file is useless by itself. Make sure it is sourced by Bash.
+# You can do this by adding the snippet below in the global configuration file. On Arch Linux, said file is: /etc/bash.bashrc
+
 # if [ -r "/etc/bash.bash_aliases" ]; then
 #     . "/etc/bash.bash_aliases"
 # fi
-# -r checks if the file is readable;
+
+# A better alternative is to use the script inside /etc/profile.d
+
 
 # Even though this file was written for Bash, >almost< everything here is POSIX-compatible,
-# so you should be able to use this anywhere with minimal friction (change the hashbang).
+# so you should be able to use this anywhere with minimal friction.
 
 # This file was written for Arch Linux btw, some aliases aren't applicable for other distros.
 
@@ -183,11 +185,11 @@ alias f="find . | grep "
 # Search command line history. Usage: h <search string>
 alias h="history | grep "
 
-# To see if a command is aliased, a file, or a built-in command
-alias checkcommand="type -t"
+# See if a command is aliased, a file, or a built-in command
+alias check-command="type -t"
 
 # Count all files (recursively) in the current folder
-alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
+alias count-files="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
 
 # Aliases for archives
 if command_exists tar; then
@@ -231,5 +233,5 @@ fi
 # Cleanup
 # -----------------------------------------------------
 # The functions defined here should not be available beyond this file's scope.
-# Users can define their own functions in their individual configuration.
+# Users can define custom functions in their individual configuration.
 unset -f command_exists
