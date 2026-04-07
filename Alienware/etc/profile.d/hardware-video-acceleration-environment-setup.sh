@@ -43,14 +43,14 @@ set_mesa_vk_device() {
     # from vk_devices if you have multiple GPUs from the same vendor.
 
     ### nvidia_id=$(grep -Eo "10de:[0-9a-f]{4}" <<< "$vk_devices" | head -n1) # Bash equivalent of the operation done below, kept for archival purposes.
-    nvidia_id=$(echo "$vk_devices" | grep -Eo "10de:[0-9a-f]{4}" | head -n1)
-    intel_id=$(echo "$vk_devices" | grep -Eo "8086:[0-9a-f]{4}" | head -n1)
-    amd_id=$(echo "$vk_devices" | grep -Eo "1002:[0-9a-f]{4}" | head -n1)
+    # The "\" in front of grep is to escape the alias. An alternative is to pass the absolute path, e.g. /bin/grep
+    nvidia_id=$(echo "$vk_devices" | \grep -Eo "10de:[0-9a-f]{4}" | head -n1)
+    intel_id=$(echo "$vk_devices" | \grep -Eo "8086:[0-9a-f]{4}" | head -n1)
 
     # Set the GPU used for Vulkan
     ## Remove and/or change the order of the vendors according to your system's
     ## configuration, in order to speed up the function's execution.
-    for var in "$nvidia_id" "$intel_id" "$amd_id"; do
+    for var in "$nvidia_id" "$intel_id"; do
         if [ -n "$var" ]; then
             export MESA_VK_DEVICE_SELECT="$var"
             echo "MESA_VK_DEVICE_SELECT set to $MESA_VK_DEVICE_SELECT"
@@ -58,13 +58,13 @@ set_mesa_vk_device() {
         fi
     done
 
-    unset vk_devices nvidia_id intel_id amd_id
+    unset vk_devices nvidia_id intel_id
 }
 set_mesa_vk_device
 
 # Enabling Vulkan Video support with Intel GPU
 ## https://wiki.archlinux.org/title/Hardware_video_acceleration#Configuring_Vulkan_Video
-#export ANV_VIDEO_DECODE=1    # Legacy variable, not sure if it's relevant anymore, but it'll stay for now.
+export ANV_VIDEO_DECODE=1    # Legacy variable, not sure if it's relevant anymore, but it'll stay for now.
 export ANV_DEBUG=video-decode,video-encode
 
 
@@ -98,7 +98,9 @@ set_vaapi_driver() {
             echo "LIBVA_DRIVER_NAME set to radeonsi (AMD)"
             ;;
 
-        *) echo "Unknown or unset MESA_VK_DEVICE_SELECT. LIBVA_DRIVER_NAME not set." ;;
+        *)
+            echo "Unknown or unset MESA_VK_DEVICE_SELECT. LIBVA_DRIVER_NAME not set."
+            ;;
     esac
 }
 set_vaapi_driver
@@ -140,7 +142,9 @@ set_vdpau_driver() {
             echo "VDPAU_DRIVER set to radeonsi (AMD)"
             ;;
 
-        *) echo "Unknown or unset MESA_VK_DEVICE_SELECT. VDPAU_DRIVER not set." ;;
+        *)
+            echo "Unknown or unset MESA_VK_DEVICE_SELECT. VDPAU_DRIVER not set."
+            ;;
     esac
 }
 set_vdpau_driver
